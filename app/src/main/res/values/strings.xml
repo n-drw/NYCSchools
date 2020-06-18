@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NYC Schools</string>
+    <string name="title_home">Home</string>
+    <string name="title_maps">Schools</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_about">About</string>
+    <string name="loading_schools_error">Error loading schools</string>
+</resources>

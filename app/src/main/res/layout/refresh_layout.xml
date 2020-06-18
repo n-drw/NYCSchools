@@ -1,0 +1,28 @@
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/refresh_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<RelativeLayout
+		android:id="@+id/schoolContainer"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:clickable="true"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:id="@+id/schoolLayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<ListView
+				android:id="@+id/school_list"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+		</LinearLayout>
+	</RelativeLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
