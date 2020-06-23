@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.FragmentNavigator;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.List;
 import cab.andrew.nycschools.data.model.School;
 import cab.andrew.nycschools.databinding.ItemSchoolBinding;
 
-public class SchoolListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SchoolListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SchoolSelectedListener{
 	private List<School> schools = new ArrayList<>();
 	private ItemSchoolBinding binding;
 	private static String TAG = "SchoolListAdapter";
@@ -30,7 +32,7 @@ public class SchoolListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //		binding.getRoot().setOnClickListener(onClickListener -> {
 //
 //		});
-		return new SchoolViewHolder(binding);
+		return new SchoolViewHolder(binding, schoolSelectedListener);
 	}
 
 	@Override
@@ -49,14 +51,24 @@ public class SchoolListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 		notifyDataSetChanged();
 	}
 
-	public static class SchoolViewHolder extends RecyclerView.ViewHolder{
+	@Override
+	public void onSchoolSelected(View view) {
+		FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder()
+				.addSharedElement(view, "shared_element")
+				.build();
+	}
+
+
+	public static class SchoolViewHolder extends RecyclerView.ViewHolder {
 		private TextView schoolAddress;
 		private TextView schoolName;
 		private TextView schoolNumber;
+		private SchoolSelectedListener schoolSelectedListener;
 //		private ImageView schoolImg;
 
-		public SchoolViewHolder(@NonNull ItemSchoolBinding binding) {
+		public SchoolViewHolder(@NonNull ItemSchoolBinding binding, SchoolSelectedListener schoolSelectedListener) {
 			super(binding.getRoot());
+			this.schoolSelectedListener = schoolSelectedListener;
 //			schoolImg = binding.image;
 			schoolAddress = binding.schoolAddressTv;
 			schoolName = binding.schoolNameTv;
@@ -68,5 +80,10 @@ public class SchoolListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			schoolName.setText(school.getSchoolName());
 			schoolNumber.setText(school.getPhoneNumber());
 		}
+
+//		@Override
+//		public void onSchoolSelected(School school) {
+//			schoolSelectedListener.onSchoolSelected(school);
+//		}
 	}
 }

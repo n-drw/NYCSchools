@@ -3,16 +3,16 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/mobile_navigation"
-	app:startDestination="@id/navigation_map">
+	app:startDestination="@id/navigation_home">
 
 	<fragment
 		android:id="@+id/navigation_home"
 		android:name="cab.andrew.nycschools.ui.list.ListFragment"
 		android:label="@string/title_home"
-		tools:layout="@layout/fragment_home" />
+		tools:layout="@layout/list_fragment" />
 
 	<fragment
-		android:id="@+id/navigation_map"
+		android:id="@+id/navigation_maps"
 		android:name="cab.andrew.nycschools.ui.maps.MapsFragment"
 		android:label="@string/title_maps"
 		tools:layout="@layout/fragment_maps" />
