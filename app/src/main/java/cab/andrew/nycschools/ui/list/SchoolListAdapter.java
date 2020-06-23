@@ -8,7 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavAction;
 import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.FragmentNavigator;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,12 +34,12 @@ public class SchoolListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //		binding.getRoot().setOnClickListener(onClickListener -> {
 //
 //		});
-		return new SchoolViewHolder(binding, schoolSelectedListener);
+		return new SchoolViewHolder(binding);
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-		((SchoolViewHolder)holder).bind(schools.get(position));
+		((SchoolViewHolder)holder).bind(schools.get(position), schoolSelectedListener);
 	}
 
 	@Override
@@ -56,6 +58,8 @@ public class SchoolListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 		FragmentNavigator.Extras extras = new FragmentNavigator.Extras.Builder()
 				.addSharedElement(view, "shared_element")
 				.build();
+		NavDirections action = ListFragmentDirections.actionNavigationHomeToDetailsFragment();
+		Navigation.findNavController(view).navigate(action, extras);
 	}
 
 
@@ -66,19 +70,20 @@ public class SchoolListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 		private SchoolSelectedListener schoolSelectedListener;
 //		private ImageView schoolImg;
 
-		public SchoolViewHolder(@NonNull ItemSchoolBinding binding, SchoolSelectedListener schoolSelectedListener) {
+		public SchoolViewHolder(@NonNull ItemSchoolBinding binding) {
 			super(binding.getRoot());
-			this.schoolSelectedListener = schoolSelectedListener;
 //			schoolImg = binding.image;
 			schoolAddress = binding.schoolAddressTv;
 			schoolName = binding.schoolNameTv;
 			schoolNumber = binding.schoolNumberTv;
+//			schoolSelectedListener = binding.getClickHandler();
 		}
 
-		public void bind(School school) {
+		public void bind(School school, SchoolSelectedListener schoolSelectedListener) {
 			schoolAddress.setText(school.getPrimaryAddressLine());
 			schoolName.setText(school.getSchoolName());
 			schoolNumber.setText(school.getPhoneNumber());
+//			schoolSelectedListener.onSchoolSelected(this.itemView);
 		}
 
 //		@Override

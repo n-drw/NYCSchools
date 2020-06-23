@@ -9,7 +9,11 @@
 		android:id="@+id/navigation_home"
 		android:name="cab.andrew.nycschools.ui.list.ListFragment"
 		android:label="@string/title_home"
-		tools:layout="@layout/list_fragment" />
+		tools:layout="@layout/list_fragment" >
+		<action
+			android:id="@+id/action_navigation_home_to_detailsFragment"
+			app:destination="@id/detailsFragment" />
+	</fragment>
 
 	<fragment
 		android:id="@+id/navigation_maps"
@@ -22,4 +26,9 @@
 		android:name="cab.andrew.nycschools.ui.about.AboutFragment"
 		android:label="@string/title_about"
 		tools:layout="@layout/about_fragment" />
+	<fragment
+		android:id="@+id/detailsFragment"
+		android:name="cab.andrew.nycschools.ui.detail.DetailsFragment"
+		android:label="details_fragment"
+		tools:layout="@layout/details_fragment" />
 </navigation>
