@@ -5,6 +5,7 @@ import android.app.Application;
 import cab.andrew.nycschools.base.BaseApplication;
 import cab.andrew.nycschools.data.source.SchoolsRepositoryModule;
 import cab.andrew.nycschools.di.module.ActivityBindingModule;
+import cab.andrew.nycschools.di.module.ContextModule;
 import cab.andrew.nycschools.di.module.UtilsModule;
 import cab.andrew.nycschools.di.scopes.AppScope;
 import dagger.BindsInstance;
@@ -17,7 +18,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
 		AndroidSupportInjectionModule.class,
 		ActivityBindingModule.class,
 		UtilsModule.class,
-		SchoolsRepositoryModule.class
+		SchoolsRepositoryModule.class,
+		ContextModule.class
 	}
 )
 

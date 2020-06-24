@@ -1,5 +1,6 @@
 package cab.andrew.nycschools.ui.detail;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -41,16 +42,18 @@ public class DetailsFragment extends DaggerFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
     	binding = DetailsFragmentBinding.inflate(inflater, container, false);
-    	return binding.getRoot();
+    	View view = binding.getRoot();
+    	return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        detailsViewModel = new ViewModelProvider(this, viewModelFactory).get(DetailsViewModel.class);
-    }
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		detailsViewModel = new ViewModelProvider(this, viewModelFactory).get(DetailsViewModel.class);
+		subscribeObserver();
+	}
 
-    private void subscribeObserver(){
+	private void subscribeObserver(){
     	detailsViewModel.observeSchool(school.getDbn()).removeObservers(getViewLifecycleOwner());
     	detailsViewModel.observeSchool(school.getDbn()).observe(getViewLifecycleOwner(), detailsResource -> {
 			if(detailsResource != null) {
